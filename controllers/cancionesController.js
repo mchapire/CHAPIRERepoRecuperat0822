@@ -4,7 +4,7 @@ let cancionesController = {
     listar: function(req, res){
         db.Canciones.findAll()
         .then(function(canciones){
-            return res.render("listadoCanciones", {canciones: canciones})
+            res.render("listadoCanciones", {canciones: canciones})
         })
     },
     crear: function(req, res){

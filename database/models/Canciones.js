@@ -3,37 +3,37 @@ module.exports = function(sequelize, dataTypes){
 
     let cols = {
         id:{
-            type: dataTypes.INTEGER,
+            type: dataTypes.TINYINT(11).UNSIGNED,
             primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
+            allowNull: false,
+            autoIncrement: true
         },
         titulo:{
             type: dataTypes.STRING,
-            defaultValue: null
+            defaultValue: "null"
         },
         duracion:{
             type: dataTypes.INTEGER,
-            defaultValue: null
+            defaultValue: "null"
         },
-        createdAt: {
-            field: 'created_at',
+        created_at: {
+            field: "created_at",
             type: dataTypes.DATE
         },
-        updatedAt: {
-            field: 'updated_at',
+        updated_at: {
+            field: "updated_at",
             type: dataTypes.DATE
         },
         genero_id:{
-            type: dataTypes.INTEGER,
+            type: dataTypes.TINYINT(11),
             allowNull: false
         },
         album_id:{
-            type: dataTypes.INTEGER,
+            type: dataTypes.TINYINT(11),
             allowNull: false
         },
         artista_id:{
-            type: dataTypes.INTEGER,
+            type: dataTypes.TINYINT(11),
             allowNull: false
         },
     }
