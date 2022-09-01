@@ -16,14 +16,14 @@ module.exports = function(sequelize, dataTypes){
             type: dataTypes.INTEGER,
             defaultValue: "null"
         },
-        created_at: {
-            field: "created_at",
-            type: dataTypes.DATE
-        },
-        updated_at: {
-            field: "updated_at",
-            type: dataTypes.DATE
-        },
+        // createdAt: {
+        //     field: "created_at",
+        //     type: dataTypes.DATE
+        // },
+        // updatedAt: {
+        //     field: "updated_at",
+        //     type: dataTypes.DATE
+        // },
         genero_id:{
             type: dataTypes.TINYINT(11),
             allowNull: false
@@ -37,10 +37,18 @@ module.exports = function(sequelize, dataTypes){
             allowNull: false
         },
     }
+    // let config = {
+    //     tableName: "canciones",
+    //     timeStamps: false
+    // }
+    //
     let config = {
-        tableName: "canciones",
-        timeStamps: false
+        timestamps: false,
+        paranoid: true,
+        createdAt: "created_at",
+        updatedAt: "updated_at",
     }
+    //
     let Canciones = sequelize.define(alias, cols, config);
 
     Canciones.associate = function(models){

@@ -12,7 +12,7 @@ module.exports = function(sequelize, dataTypes){
     }
     let config = {
         tableName: "generos",
-        timeStamps: false
+        timeStamps: true
     }
     let Generos = sequelize.define(alias, cols, config);
 
