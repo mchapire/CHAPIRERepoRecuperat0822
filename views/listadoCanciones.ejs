@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canciones</title>
+    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <h1>Listado de canciones</h1>
+      <p></p>
+    </header>
+    <div>
+      <ul>
+        <% canciones.forEach(cancion => { %>
+              <li> 
+                <%= cancion.id %> | <%= cancion.titulo %> | <%= cancion.duracion %>
+              </li>
+              <%   }) %>
+      </ul>
+    </div>
+  </body>
+</html>

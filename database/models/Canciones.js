@@ -16,13 +16,13 @@ module.exports = function(sequelize, dataTypes){
             type: dataTypes.INTEGER,
             defaultValue: null
         },
-        created_at:{
-            type: dataTypes.DATE,
-            defaultValue: null
+        createdAt: {
+            field: 'created_at',
+            type: dataTypes.DATE
         },
-        updated_at:{
-            type: dataTypes.DATE,
-            defaultValue: null
+        updatedAt: {
+            field: 'updated_at',
+            type: dataTypes.DATE
         },
         genero_id:{
             type: dataTypes.INTEGER,
@@ -42,5 +42,21 @@ module.exports = function(sequelize, dataTypes){
         timeStamps: false
     }
     let Canciones = sequelize.define(alias, cols, config);
-    return Canciones
+
+    Canciones.associate = function(models){
+        Canciones.belongsTo(models.Albumes, {
+            as: "canciones",
+            foreignKey: "album_id"
+        });
+        Canciones.belongsTo(models.Generos, {
+            as: "generos",
+            foreignKey: "genero_id"
+        });
+        Canciones.belongsTo(models.Artistas, {
+            as: "artistas",
+            foreignKey: "artista_id"
+        });
+    }
+
+    return Canciones;
 }

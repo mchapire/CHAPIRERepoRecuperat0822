@@ -5,7 +5,6 @@ module.exports = function(sequelize, dataTypes){
         id:{
             type: dataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
         },
         name:{
             type: dataTypes.STRING
@@ -16,5 +15,13 @@ module.exports = function(sequelize, dataTypes){
         timeStamps: false
     }
     let Generos = sequelize.define(alias, cols, config);
+
+    Generos.associate = function(models){
+        Generos.hasMany(models.Canciones, {
+            as: "canciones",
+            foreignKey: "genero_id"
+        });
+    }
+
     return Generos;
 }

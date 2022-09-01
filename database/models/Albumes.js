@@ -22,5 +22,14 @@ module.exports = function(sequelize, dataTypes){
         timeStamps: false
     }
     let Albumes = sequelize.define(alias, cols, config);
+
+    Albumes.associate = function(models){
+        Albumes.hasMany(models.Canciones, {
+            as: "canciones",
+            foreignKey: "album_id"
+        });
+    }
+    
     return Albumes;
 }
+
