@@ -3,15 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let methodOverride = require('method-override');
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var cancionesRouter = require('./routes/canciones');
 var generosRouter = require('./routes/generos');
+var cancionesApiRouter = require('./routes/api/canciones')
 
 var app = express();
-let methodOverride = require('method-override');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/canciones', cancionesRouter);
 app.use('/generos', generosRouter);
+app.use('/api/canciones', cancionesApiRouter);
 
 
 
@@ -46,5 +48,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

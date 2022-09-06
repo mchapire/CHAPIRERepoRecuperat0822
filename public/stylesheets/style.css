@@ -23,6 +23,8 @@ ul{
   background-color: black;
   color: white;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
 }
 .ul-genero{
   display: flex;

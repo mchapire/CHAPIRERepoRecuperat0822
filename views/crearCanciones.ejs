@@ -45,15 +45,9 @@
                         <% } %>
                     </select>
                 </div>
-                <div>
-                    <label for="">Artista</label>
-                    <select name="artista">
-                        <% for (let i = 0; i < artistas.length; i++) { %>
-                            <option value="<%=artistas[i].id%>">
-                                <%=artistas[i].nombre%> <%=artistas[i].apellido%>
-                            </option>
-                            <% } %>
-                        </select>
+                    <div>
+                        <label for="">ID artista</label>
+                        <input type="text" name="idArtista">
                     </div>
             <div class="boton-crear">
                 <button type="submit" >Crear</button>

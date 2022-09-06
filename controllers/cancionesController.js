@@ -36,7 +36,7 @@ let cancionesController = {
             created_at: req.body.creacion,
             updated_at: req.body.lanzamiento,
             genero_id: req.body.genero,
-            album_id: req.body.idAlbum,
+            album_id: req.body.albumes,
             artista_id: req.body.idArtista
         })
         .then(function(){
@@ -56,11 +56,13 @@ let cancionesController = {
      },
      actualizar: function(req, res){
          db.Canciones.update({
-             titulo: req.body.titulo,
-             duracion: req.body.duracion,
-             genero_id: req.body.genero,
-             album_id: req.body.idAlbum,
-             artista_id: req.body.idArtista
+            titulo: req.body.titulo,
+            duracion: req.body.duracion,
+            created_at: req.body.creacion,
+            updated_at: req.body.lanzamiento,
+            genero_id: req.body.genero,
+            album_id: req.body.idAlbum,
+            artista_id: req.body.idArtista
             },
             {
                 where: {
@@ -69,7 +71,6 @@ let cancionesController = {
             })
             .then(() =>{
                 return res.redirect("/canciones/detalle/" + req.params.id)
-                console.log(body)
                 
             })
             .catch(error => res.send(error))
@@ -95,7 +96,7 @@ let cancionesController = {
         let cancionesSearch = db.Canciones.findAll({
             include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}],
             where: {
-                tags: { [Op.like]: '%' + req.query.keywords + '%' },
+                titulo: { [Op.like]: '%' + req.query.keywords + '%' },
                    }
                 })
         .then((cancionesSearch) => {
@@ -106,16 +107,6 @@ let cancionesController = {
             )
         })
     }
-    // let pedidoCanciones = db.Canciones.findAll({
-    //     include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
-    // });
-    // let pedidoGeneros = db.Generos.findAll();
-
-    // Promise.all([pedidoCanciones, pedidoGeneros])
-    //     .then(function([canciones, generos]){
-
-    //     res.render("listadoCanciones", {canciones: canciones, generos: generos})
-    //      })
 }
 
 module.exports = cancionesController;
