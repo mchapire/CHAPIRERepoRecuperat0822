@@ -24,6 +24,11 @@ ul{
   color: white;
   justify-content: center;
 }
+.ul-genero{
+  display: flex;
+  flex-direction: column;
+
+}
 li{
   padding: 10px;
   padding-left: 0px;

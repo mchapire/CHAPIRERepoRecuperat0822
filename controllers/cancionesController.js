@@ -15,9 +15,17 @@ let cancionesController = {
              })
     },
     crear: function(req, res){
-        db.Generos.findAll()
-            .then(function(generos){
-            res.render("crearCanciones", {generos: generos})
+        let pedidoCanciones = db.Canciones.findAll({
+            include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}, {association: "artistas"}]
+        });
+        let pedidoGeneros = db.Generos.findAll();
+        let pedidoAlbumes = db.Albumes.findAll();
+        let pedidoArtistas = db.Artistas.findAll();
+
+        Promise.all([pedidoCanciones, pedidoGeneros, pedidoAlbumes, pedidoArtistas])
+            .then(function([canciones, generos, albumes, artistas]){
+
+            res.render("crearCanciones", {canciones: canciones, generos: generos, albumes: albumes, artistas: artistas})
              })
     },
     guardar: function(req, res){
@@ -45,6 +53,7 @@ let cancionesController = {
             res.render("editarCanciones", {canciones: canciones, generos: generos})
              })
      },
+
      actualizar: function(req, res){
          db.Canciones.update({
              titulo: req.body.titulo,
@@ -61,10 +70,10 @@ let cancionesController = {
             .then(() =>{
                 return res.redirect("/canciones/detalle/" + req.params.id)
                 console.log(body)
-                
             })
             .catch(error => res.send(error))
         },
+
         detalle: function(req, res){
             db.Canciones.findByPk(req.params.id, {
                 include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
