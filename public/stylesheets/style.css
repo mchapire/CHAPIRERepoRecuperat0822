@@ -6,7 +6,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 header{
-  padding-left: 10px;
 }
 a {
   color: white;
@@ -18,10 +17,30 @@ ul{
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  background-color: white;
+}
+.ul-header{
   background-color: black;
+  color: white;
+  justify-content: center;
 }
 li{
   padding: 10px;
   padding-left: 0px;
-  color: white;
+  color: black;
+}
+.formulario-crear{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+}
+.formulario-crear div{
+  padding: 10px;
+}
+.div-formulario-crear{
+  display: flex;
+  margin: auto;
+}
+.boton-crear{
+  text-align: right;
 }

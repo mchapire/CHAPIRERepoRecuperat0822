@@ -4,19 +4,8 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='../stylesheets/style.css' />
   </head>
+  <%- include('./partials/header', {title: 'Inicio'}) %>
   <body>
-    <header>
-      <h1><%= title %></h1>
-      <p>Welcome to <%= title %></p>
-    </header>
-    <div>
-      <ul>
-          <li><a href="/canciones/listar">Ver canciones</a></li>
-          <li><a href="/canciones/editar">Editar canciones</a></li>
-          <li><a href="/canciones/buscar">Buscar canciones</a></li>
-          <li><a href="/canciones/crear">Crear canciones</a></li>
-          <li><a href="/generos">Géneros</a></li>
-        </ul>
-      </div>
+    
   </body>
 </html>

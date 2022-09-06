@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='../stylesheets/style.css' />
+  </head>
+  <%- include('./partials/header', {title: 'Generos'}) %>
+  <body>
+    <main>
+    <title>Generos</title>
+    <div>
+      <ul>
+        <% generos.forEach(genero => { %>
+                <li> 
+                  <h2><%= genero.id %> | <%= genero.name %></h2>
+                </li>
+              <%   }) %>
+      </ul>
+    </div>
+    <div>
+      <button type="button" onclick="location.href='/'">Inicio</button>
+    </div>
+  </main>
+  <%- include('./partials/footer') %>  
+</body>
+</html>

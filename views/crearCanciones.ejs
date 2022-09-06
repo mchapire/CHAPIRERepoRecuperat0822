@@ -2,14 +2,14 @@
 <html>
   <head>
     <title>Crear canciones</title>
-    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/style.css' />
   </head>
   <body>
-    <header>
-      <h1>Creador de canciones</h1>
-    </header>
-    <form action="/canciones/crear" method="POST">
-        <div>
+      <%- include('./partials/header', {title: 'Crear'}) %>
+    <main>
+    <div class="div-formulario-crear">
+      <form action="/canciones/crear" method="POST" class="formulario-crear">
+          <div>
             <label for="">Titulo</label>
             <input type="text" name="titulo">
         </div>
@@ -18,32 +18,40 @@
             <input type="text" name="duracion">
         </div>
         <div>
-            <label for="">Fecha creación</label>
-            <input type="date" name="fechaCreacion">
+            <label for="">Genero</label>
+            <select name="genero">
+                <% for (let i = 0; i < generos.length; i++) { %>
+                    <option value="<%=generos[i].id%>">
+                        <%=generos[i].name%>
+                    </option>
+                    <% } %>
+                </select>
+            </div>
+            <div>
+                <label for="">Creación</label>
+                <input type="date" name="creacion">
+            </div>
+            <div>
+                <label for="">Lanzamiento</label>
+                <input type="date" name="lanzamiento">
+            </div>
+            <div>
+                <label for="">Id de álbum</label>
+                <input type="text" name="idAlbum">
+            </div>
+            <div>
+                <label for="">Id de artista</label>
+                <input type="text" name="idArtista">
+            </div>
+            <div class="boton-crear">
+                <button type="submit" >Crear</button>
+            </div>
+            <div>
+                <button type="button" onclick="location.href='/'">Inicio</button>
+            </div>
+        </form>
         </div>
-        <div>
-            <label for="">Fecha lanzamiento</label>
-            <input type="date" name="fechaLanzamiento">
-        </div>
-        <div>
-            <label for="">Género</label>
-            <select name="genero" id="">
-                <option value="">
-                    <p>genero</p>
-                </option>
-            </select>
-        </div>
-        <div>
-            <label for="">Id de álbum</label>
-            <input type="text" name="idAlbum">
-        </div>
-        <div>
-            <label for="">Id de artista</label>
-            <input type="text" name="idArtista">
-        </div>
-        <div>
-            <button type="submit">Crear</button>
-        </div>
-    </form>
-  </body>
-</html>
+    </main>
+    <%- include('./partials/footer') %>    
+</body>
+    </html>

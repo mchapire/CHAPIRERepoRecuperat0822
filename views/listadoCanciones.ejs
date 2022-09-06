@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canciones</title>
-    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/style.css' />
   </head>
   <body>
-    <header>
-      <h1>Listado de canciones</h1>
-      <p></p>
-    </header>
-    <div>
-      <ul>
-        <% canciones.forEach(cancion => { %>
+    <%- include('./partials/header', {title: 'Listado'}) %>
+    <main>
+      <div>
+        <ul>
+          <% for (let i=0; i < canciones.length; i++) { %>
+            <a href="/canciones/detalle/<%= canciones[i].id %>">
               <li> 
-                <%= cancion.id %> | <%= cancion.titulo %> | <%= cancion.duracion %>
+                <h2><%= canciones[i].id %> | <%= canciones[i].titulo %> | <%= canciones[i].duracion %> | <%= canciones[i].generos.name %></h2>
               </li>
-              <%   }) %>
-      </ul>
+            </a>
+            <%   } %>
+          </ul>
+        </div>
+        <div>
+          <button type="button" onclick="location.href='/canciones/crear'">Crear canción</button>
+        </div>
+    <div>
+      <button type="button" onclick="location.href='/'">Inicio</button>
     </div>
+  </main>
+    <%- include('./partials/footer') %>
   </body>
 </html>

@@ -3,7 +3,7 @@ module.exports = function(sequelize, dataTypes){
 
     let cols = {
         id:{
-            type: dataTypes.TINYINT(11).UNSIGNED,
+            type: dataTypes.INTEGER,
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
@@ -26,7 +26,7 @@ module.exports = function(sequelize, dataTypes){
         // },
         genero_id:{
             type: dataTypes.TINYINT(11),
-            allowNull: false
+            allowNull: true
         },
         album_id:{
             type: dataTypes.TINYINT(11),
@@ -37,29 +37,24 @@ module.exports = function(sequelize, dataTypes){
             allowNull: false
         },
     }
-    // let config = {
-    //     tableName: "canciones",
-    //     timeStamps: false
-    // }
-    //
     let config = {
-        timestamps: false,
-        paranoid: true,
-        createdAt: "created_at",
-        updatedAt: "updated_at",
+        timestamps: true,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        deletedAt: false
     }
-    //
+
     let Canciones = sequelize.define(alias, cols, config);
 
     Canciones.associate = function(models){
         Canciones.belongsTo(models.Albumes, {
-            as: "canciones",
+            as: "albumes",
             foreignKey: "album_id"
         });
         Canciones.belongsTo(models.Generos, {
             as: "generos",
-            foreignKey: "genero_id"
-        });
+             foreignKey: "genero_id"
+             });
         Canciones.belongsTo(models.Artistas, {
             as: "artistas",
             foreignKey: "artista_id"

@@ -18,15 +18,18 @@ module.exports = function(sequelize, dataTypes){
         },
     }
     let config = {
-        tableName: "artistas",
-        timeStamps: false
+        timestamps: false,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        deletedAt: false
     }
+    
     let Artistas = sequelize.define(alias, cols, config);
 
     Artistas.associate = function(models){
         Artistas.hasMany(models.Canciones, {
-            as: "canciones",
-            foreignKey: "artista_id"
+            as: "artistas",
+            foreignKey: "id"
         });
     }
     

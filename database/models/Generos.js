@@ -11,16 +11,19 @@ module.exports = function(sequelize, dataTypes){
         },
     }
     let config = {
-        tableName: "generos",
-        timeStamps: true
+        timestamps: false,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        deletedAt: false
     }
+    
     let Generos = sequelize.define(alias, cols, config);
 
-    Generos.associate = function(models){
-        Generos.hasMany(models.Canciones, {
-            as: "generos",
-            foreignKey: "genero_id"
-        });
+     Generos.associate = function(models){
+         Generos.hasMany(models.Canciones, {
+             as: "generos",
+             foreignKey: "genero_id",
+         });
     }
 
     return Generos;
