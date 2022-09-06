@@ -1,4 +1,5 @@
 let db = require("../database/models");
+const { Op } = require("sequelize");
 
 let cancionesController = {
     listar: function(req, res){
@@ -60,7 +61,6 @@ let cancionesController = {
             })
             .then(() =>{
                 return res.redirect("/canciones/detalle/" + req.params.id)
-                console.log(body)
                 
             })
             .catch(error => res.send(error))
@@ -80,7 +80,33 @@ let cancionesController = {
             }
         })
         res.redirect("/canciones/listar")
+    },
+    search: (req, res) => { 
+        let search = req.query.keywords;
+        let cancionesSearch = db.Canciones.findAll({
+            include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}],
+            where: {
+                tags: { [Op.like]: '%' + req.query.keywords + '%' },
+                   }
+                })
+        .then((cancionesSearch) => {
+                return res.render('resultadoBusqueda', { 
+                    cancionesSearch, 
+                    search
+                }
+            )
+        })
     }
+    // let pedidoCanciones = db.Canciones.findAll({
+    //     include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
+    // });
+    // let pedidoGeneros = db.Generos.findAll();
+
+    // Promise.all([pedidoCanciones, pedidoGeneros])
+    //     .then(function([canciones, generos]){
+
+    //     res.render("listadoCanciones", {canciones: canciones, generos: generos})
+    //      })
 }
 
 module.exports = cancionesController;

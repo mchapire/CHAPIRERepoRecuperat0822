@@ -10,5 +10,6 @@ router.get('/detalle/:id', cancionesController.detalle),
 router.get('/editar/:id', cancionesController.editar),
 router.put('/editar/:id', cancionesController.actualizar),
 router.post('/borrar/:id', cancionesController.borrar)
+router.get('/search', cancionesController.search); 
 
 module.exports = router;
