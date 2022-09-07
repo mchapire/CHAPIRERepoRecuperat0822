@@ -48,10 +48,11 @@ let cancionesController = {
             include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
         });
         let pedidoGeneros = db.Generos.findAll();
+        let pedidoAlbumes = db.Albumes.findAll();
 
-        Promise.all([pedidoCanciones, pedidoGeneros])
-            .then(function([canciones, generos]){
-            res.render("editarCanciones", {canciones: canciones, generos: generos})
+        Promise.all([pedidoCanciones, pedidoGeneros, pedidoAlbumes])
+            .then(function([canciones, generos, albumes]){
+            res.render("editarCanciones", {canciones: canciones, generos: generos, albumes: albumes})
              })
      },
      actualizar: function(req, res){
@@ -61,7 +62,7 @@ let cancionesController = {
             created_at: req.body.creacion,
             updated_at: req.body.lanzamiento,
             genero_id: req.body.genero,
-            album_id: req.body.idAlbum,
+            album_id: req.body.albumes,
             artista_id: req.body.idArtista
             },
             {
@@ -70,10 +71,9 @@ let cancionesController = {
                 }
             })
             .then(() =>{
-                return res.redirect("/canciones/detalle/" + req.params.id)
+                return res.redirect("/canciones/listar")
                 
             })
-            .catch(error => res.send(error))
         },
         detalle: function(req, res){
             db.Canciones.findByPk(req.params.id, {
@@ -89,24 +89,10 @@ let cancionesController = {
                 id: req.params.id
             }
         })
-        res.redirect("/canciones/listar")
-    },
-    search: (req, res) => { 
-        let search = req.query.keywords;
-        let cancionesSearch = db.Canciones.findAll({
-            include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}],
-            where: {
-                titulo: { [Op.like]: '%' + req.query.keywords + '%' },
-                   }
-                })
-        .then((cancionesSearch) => {
-                return res.render('resultadoBusqueda', { 
-                    cancionesSearch, 
-                    search
-                }
-            )
-        })
-    }
+        .then(function(){
+            res.redirect("/canciones/listar")
+    })
+},
 }
 
 module.exports = cancionesController;

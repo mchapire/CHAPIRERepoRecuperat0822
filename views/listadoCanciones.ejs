@@ -7,7 +7,7 @@
     <%- include('./partials/header', {title: 'Listado'}) %>
     <main>
       <div>
-        <ul>
+        <ul class="ul-listado">
           <% for (let i=0; i < canciones.length; i++) { %>
             <a href="/canciones/detalle/<%= canciones[i].id %>">
               <li> 
