@@ -10,11 +10,13 @@ module.exports = function(sequelize, dataTypes){
         },
         nombre:{
             type: dataTypes.STRING,
-            defaultValue: null
+            defaultValue: null,
+            allowNull: false
         },
         apellido:{
             type: dataTypes.STRING,
-            defaultValue: null
+            defaultValue: null,
+            allowNull: false
         },
     }
     let config = {

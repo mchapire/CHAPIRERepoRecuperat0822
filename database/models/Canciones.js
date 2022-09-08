@@ -16,25 +16,17 @@ module.exports = function(sequelize, dataTypes){
             type: dataTypes.INTEGER,
             defaultValue: "null"
         },
-        // createdAt: {
-        //     field: "created_at",
-        //     type: dataTypes.DATE
-        // },
-        // updatedAt: {
-        //     field: "updated_at",
-        //     type: dataTypes.DATE
-        // },
         genero_id:{
             type: dataTypes.TINYINT(11),
             allowNull: true
         },
         album_id:{
             type: dataTypes.TINYINT(11),
-            allowNull: false
+            allowNull: true
         },
         artista_id:{
             type: dataTypes.TINYINT(11),
-            allowNull: false
+            allowNull: true
         },
     }
     let config = {

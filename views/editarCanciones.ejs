@@ -2,60 +2,56 @@
 <html>
   <head>
     <title>Editar canciones</title>
-    <link rel='stylesheet' href='../stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/style.css' />  
   </head>
   <%- include('./partials/header', {title: 'Editar'}) %>
   <body>
     <main>
     <h1><%= canciones.titulo %></h1>
     <div>
-      <form action="/canciones/editar/<%=canciones.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
-        <div>
+      <form action="/canciones/editar/<%= canciones.id%>?_method=PUT" method="POST" style="display: flex; flex-direction: column;">
+        <div style="padding: 5px;">
           <label for="">Titulo</label>
           <input type="text" name="titulo" value="<%= canciones.titulo%>">
         </div>
-        <div>
+        <div style="padding: 5px;">
           <label for="">Duracion</label>
           <input type="text" name="duracion" value="<%= canciones.duracion%>">
         </div>
-        <div>
-          <label for="">Genero</label>
-          <select name="genero">
-            <% for (let i = 0; i < generos.length; i++) { %>
-              <% if (generos[i].id == canciones.genero_id) { %>
-                      <option value="<%generos[i].id%>" selected>
-                        <%=generos[i].name%>
-                      </option>
-                <% } else { %>
-                  <option value="<%generos[i].id%>">
-                    <%=generos[i].name%>
-                  </option>
-                <% } %>
-            <% } %>
-          </select>
+        <div style="padding: 5px;">
+          <label for="">Genero actual: <%= canciones.generos.name%> (<%= canciones.generos.id %>) </label>
         </div>
-        <div>
+        <div style="padding: 5px;">
+          <label for="">Nuevo genero: </label>
+          <input type="text" name="genero" placeholder="ID de género" required>
+        </div>
+        <div style="padding: 5px;">
+          <label for="">Artista: <%= canciones.artistas.apellido%>, <%= canciones.artistas.nombre%> (<%= canciones.artistas.id%>)</label>
+        </div>
+        <div style="padding: 5px;">
+          <label for="">Nuevo artista</label>
+          <input type="text" name="artista" placeholder="ID de artista" required>
+        </div>
+        <div style="padding: 5px;">
+          <label for="">Album actual: <%= canciones.albumes.nombre%> (<%= canciones.albumes.id%>)</label>
+        </div>
+        <div style="padding: 5px;">
           <label for="">Album</label>
-          <input type="text" name="album" value="<%= canciones.albumes.nombre%>">
+          <input type="text" name="album" placeholder="ID de album" required>
         </div>
-        <div>
-          <label for="">Artista</label>
-          Nombre:
-          <input type="text" name="artista" value="<%= canciones.artistas.nombre%>">
-        </div>
-        <div>
-          <label for="">Artista</label>
-          Apellido:
-          <input type="text" name="artista" value="<%= canciones.artistas.apellido%>">
-        </div>
-        <div>
-          <button type="submit">Editar</button>
+        <div style="padding: 10px;">
+          <button type="submit" style="background-color: rgba(102, 254, 102, 0.929);">Editar</button>
         </div>
       </form>
+      <div class="botones editar" style="display: flex; flex-direction: row; justify-content:space-evenly"> 
         <div>
           <button type="button" onclick="location.href='/'">Inicio</button>
         </div>
-    </div>
+        <div>
+          <button class="boton-atras" type="button" onclick="location.href='/canciones/listar'">Atrás</button>
+        </div>
+      </div>
+      </div>
   </main>
   <%- include('./partials/footer') %>  
 </body>
