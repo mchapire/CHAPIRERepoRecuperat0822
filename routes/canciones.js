@@ -9,7 +9,7 @@ router.post('/crear', cancionesController.guardar);
 router.get('/buscar', cancionesController.buscar);
 router.get('/detalle/:id', cancionesController.detalle),
 router.get('/editar/:id', cancionesController.editar),
-router.put('/editar/:id', cancionesController.actualizar),
+router.post('/editar/:id', cancionesController.actualizar),
 router.post('/borrar/:id', cancionesController.borrar)
 
 module.exports = router;
