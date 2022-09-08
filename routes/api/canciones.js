@@ -9,5 +9,6 @@ router.get('/detalle/:id', cancionesAPIController.detalle); //http://localhost:3
 router.get('/generos', cancionesAPIController.generos); //http://localhost:3000/api/generos
 router.post('/crear', cancionesAPIController.crear); //http://localhost:3000/api/crear
 router.delete('/borrar/:id', cancionesAPIController.borrar) //http://localhost:3000/api/borrar/idABorrar
+router.put('/editar/:id', cancionesAPIController.editar); //http://localhost:3000/api/editar/idAEditar
 
 module.exports = router;

@@ -13,12 +13,26 @@ const productAPIController = {
             .then(function([canciones, generos]){
 
             return res.status(200).json({
-                total: canciones.length,
+                totalCanciones: canciones.length,
                 totalGeneros: generos.length,
                 data: canciones,
                 status: 200
             })
         })
+    },
+    editar: function(req, res){
+       db.Canciones.update(req.body,{
+        where: {
+            id: req.params.id
+        }
+    })
+           .then(function(cancion){
+             return res.status(200).json({
+               data: cancion,
+               status: 200,
+               editada: "La canción fue editada correctamente"
+             })
+       })
     },
     detalle: function(req, res){
         db.Canciones.findByPk(req.params.id)

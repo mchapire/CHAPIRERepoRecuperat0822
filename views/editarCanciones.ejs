@@ -9,49 +9,49 @@
     <main>
     <h1><%= canciones.titulo %></h1>
     <div>
-      <form action="/canciones/editar/<%= canciones.id%>?_method=PUT" method="POST">
-        <div>
+      <form action="/canciones/editar/<%= canciones.id%>?_method=PUT" method="POST" style="display: flex; flex-direction: column;">
+        <div style="padding: 5px;">
           <label for="">Titulo</label>
           <input type="text" name="titulo" value="<%= canciones.titulo%>">
         </div>
-        <div>
+        <div style="padding: 5px;">
           <label for="">Duracion</label>
           <input type="text" name="duracion" value="<%= canciones.duracion%>">
         </div>
-        <div>
-          <label for="">Genero: <%= canciones.generos.name%> </label>
+        <div style="padding: 5px;">
+          <label for="">Genero actual: <%= canciones.generos.name%> (<%= canciones.generos.id %>) </label>
         </div>
-        <div>
+        <div style="padding: 5px;">
           <label for="">Nuevo genero: </label>
-          <input type="text" name="genero" required>
+          <input type="text" name="genero" placeholder="ID de género" required>
         </div>
-        <div>
+        <div style="padding: 5px;">
           <label for="">Artista: <%= canciones.artistas.apellido%>, <%= canciones.artistas.nombre%> (<%= canciones.artistas.id%>)</label>
         </div>
-        <div>
+        <div style="padding: 5px;">
           <label for="">Nuevo artista</label>
-          <input type="text" name="artista" required>
-          <% for (let i=0; i < artistas.length; i++) { %>
-            (<%= canciones.artistas.id %>) 
-            <%= canciones.artistas.apellido %><%= canciones.artistas.nombre %>
-          <%   } %>
+          <input type="text" name="artista" placeholder="ID de artista" required>
         </div>
-        <div>
+        <div style="padding: 5px;">
+          <label for="">Album actual: <%= canciones.albumes.nombre%> (<%= canciones.albumes.id%>)</label>
+        </div>
+        <div style="padding: 5px;">
           <label for="">Album</label>
-          <input type="text" name="album" value="<%= canciones.albumes.nombre%>">
-          <% for (let i=0; i < albumes.length; i++) { %>
-              (<%= canciones.albumes.id %>) 
-              <%= canciones.albumes.nombre %>
-            <%   } %>
+          <input type="text" name="album" placeholder="ID de album" required>
         </div>
-        <div>
-          <button type="submit">Editar</button>
+        <div style="padding: 10px;">
+          <button type="submit" style="background-color: rgba(102, 254, 102, 0.929);">Editar</button>
         </div>
       </form>
+      <div class="botones editar" style="display: flex; flex-direction: row; justify-content:space-evenly"> 
         <div>
           <button type="button" onclick="location.href='/'">Inicio</button>
         </div>
-    </div>
+        <div>
+          <button class="boton-atras" type="button" onclick="location.href='/canciones/listar'">Atrás</button>
+        </div>
+      </div>
+      </div>
   </main>
   <%- include('./partials/footer') %>  
 </body>

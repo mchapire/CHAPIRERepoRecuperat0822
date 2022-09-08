@@ -2,7 +2,11 @@
   padding: 0;
   margin: 0;
 }
+html {
+  height: 100%;
+}
 body {
+  min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 header{
@@ -55,4 +59,16 @@ li{
 .div-listado{
   padding-left: 10px;
 
+}
+.p-listado{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
 }

@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            function confirmar(){
+                var respuesta = confirm("Seguro que quieres borrar esta canción?");
+                if (respuesta == true){
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+        </script>
         <title>Detalle</title>
         <link rel='stylesheet' href='../stylesheets/style.css' />
     </head>
@@ -33,18 +44,27 @@
         </li>
     </ul>
 </div>
+<div style="padding: 10px;">
 <a href="/canciones/editar/<%= canciones.id %>">
-    <button>
+    <button style="background-color: rgba(102, 254, 102, 0.929);">
         Editar
     </button>
 </a>
+</div>
 <form action="/canciones/borrar/<%= canciones.id %>" method="POST">
-    <button type="submit">
+    <div style="padding: 10px;">
+        <button type="submit" style="background-color: rgb(243, 78, 78);" onclick="return confirmar()">
         Borrar
     </button>
+</div>
 </form>
+<div class="botones detalle" style="display: flex; flex-direction: row; justify-content:space-evenly; padding: 10px;">
+    <div>
+        <button class="boton-atras" type="button" onclick="location.href='/canciones/listar'">Atrás</button>
+      </div>
 <div>
     <button type="button" onclick="location.href='/'">Inicio</button>
+</div>
 </div>
 </main>
 <%- include('./partials/footer') %>
