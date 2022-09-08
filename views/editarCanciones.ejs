@@ -9,7 +9,7 @@
     <main>
     <h1><%= canciones.titulo %></h1>
     <div>
-      <form action="/canciones/editar/<%=canciones.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+      <form action="/canciones/editar/<%=canciones.id%>" method="POST">
         <div>
           <label for="">Titulo</label>
           <input type="text" name="titulo" value="<%= canciones.titulo%>">
@@ -20,7 +20,7 @@
         </div>
         <div>
           <label for="">Genero</label>
-          <select name="genero">
+          <!-- <select name="genero">
             <% for (let i = 0; i < generos.length; i++) { %>
               <% if (generos[i].id == canciones.genero_id) { %>
                       <option value="<%generos[i].id%>" selected>
@@ -33,7 +33,7 @@
                 <% } %>
             <% } %>
           </select>
-        </div>
+        </div> -->
         <div>
           <label for="">Album</label>
           <input type="text" name="album" value="<%= canciones.albumes.nombre%>">
