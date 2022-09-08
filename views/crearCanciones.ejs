@@ -36,7 +36,7 @@
                 <input type="date" name="lanzamiento">
             </div>
             <div>
-                <label for="">Albumes</label>
+                <label for="">Album</label>
                 <select name="albumes">
                     <% for (let i = 0; i < albumes.length; i++) { %>
                         <option value="<%=generos[i].id%>">
@@ -46,8 +46,14 @@
                     </select>
                 </div>
                     <div>
-                        <label for="">ID artista</label>
-                        <input type="text" name="idArtista">
+                        <label for="">Artista</label>
+                <select name="artistas">
+                    <% for (let i = 0; i < artistas.length; i++) { %>
+                        <option value="<%=artistas[i].id%>">
+                            <%=artistas[i].apellido%>, <%=artistas[i].nombre%>
+                        </option>
+                        <% } %>
+                    </select>
                     </div>
             <div class="boton-crear">
                 <button type="submit" >Crear</button>

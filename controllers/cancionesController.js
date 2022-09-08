@@ -1,5 +1,5 @@
 let db = require("../database/models");
-const { Op } = require("sequelize");
+const Op = db.Sequelize.Op;
 
 let cancionesController = {
     listar: function(req, res){
@@ -8,11 +8,12 @@ let cancionesController = {
             include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
         });
         let pedidoGeneros = db.Generos.findAll();
+        let pedidoAlbumes = db.Albumes.findAll();
 
-        Promise.all([pedidoCanciones, pedidoGeneros])
-            .then(function([canciones, generos]){
+        Promise.all([pedidoCanciones, pedidoGeneros, pedidoAlbumes])
+            .then(function([canciones, generos, albumes]){
 
-            res.render("listadoCanciones", {canciones: canciones, generos: generos})
+            res.render("listadoCanciones", {canciones: canciones, generos: generos, albumes: albumes})
              })
     },
     crear: function(req, res){
@@ -37,7 +38,7 @@ let cancionesController = {
             updated_at: req.body.lanzamiento,
             genero_id: req.body.genero,
             album_id: req.body.albumes,
-            artista_id: req.body.idArtista
+            artista_id: req.body.artistas
         })
         .then(function(){
         return res.redirect("/canciones/listar")
@@ -49,10 +50,11 @@ let cancionesController = {
         });
         let pedidoGeneros = db.Generos.findAll();
         let pedidoAlbumes = db.Albumes.findAll();
+        let pedidoArtistas = db.Artistas.findAll();
 
-        Promise.all([pedidoCanciones, pedidoGeneros, pedidoAlbumes])
-            .then(function([canciones, generos, albumes]){
-            res.render("editarCanciones", {canciones: canciones, generos: generos, albumes: albumes})
+        Promise.all([pedidoCanciones, pedidoGeneros, pedidoAlbumes, pedidoArtistas])
+            .then(function([canciones, generos, albumes, artistas]){
+            res.render("editarCanciones", {canciones: canciones, generos: generos, albumes: albumes, artistas: artistas})
              })
      },
      actualizar: function(req, res){
@@ -63,7 +65,7 @@ let cancionesController = {
             updated_at: req.body.lanzamiento,
             genero_id: req.body.genero,
             album_id: req.body.albumes,
-            artista_id: req.body.idArtista
+            artista_id: req.body.artistas
             },
             {
                 where: {
@@ -91,6 +93,16 @@ let cancionesController = {
         })
         .then(function(){
             res.redirect("/canciones/listar")
+    })
+},
+buscar: function(req, res){
+    db.Canciones.findAll({
+        where: {
+            titulo: {[Op.like]: `%` + req.query.keyword + `%`}
+        }
+    })
+    .then(function(canciones){
+        return res.status(200).json(canciones)
     })
 },
 }

@@ -6,12 +6,16 @@
   <body>
     <%- include('./partials/header', {title: 'Listado'}) %>
     <main>
-      <div>
+      <div class="div-listado">
         <ul class="ul-listado">
           <% for (let i=0; i < canciones.length; i++) { %>
             <a href="/canciones/detalle/<%= canciones[i].id %>">
               <li> 
-                <h2><%= canciones[i].id %> | <%= canciones[i].titulo %> | <%= canciones[i].duracion %> | <%= canciones[i].generos.name %></h2>
+                <p>ID: <%= canciones[i].id %> 
+                  <p>Título: <%= canciones[i].titulo %></p> 
+                  <p>Duración (segundos): <%= canciones[i].duracion %></p> 
+                  <p>Género: <%= canciones[i].generos.name %></p>
+                </p>
               </li>
             </a>
             <%   } %>

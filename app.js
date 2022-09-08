@@ -1,9 +1,9 @@
 let createError = require('http-errors');
 let express = require('express');
+let methodOverride = require('method-override');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let methodOverride = require('method-override');
 
 
 let indexRouter = require('./routes/index');
@@ -29,7 +29,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/canciones', cancionesRouter);
 app.use('/generos', generosRouter);
-app.use('/api/canciones', cancionesApiRouter);
+app.use('/api', cancionesApiRouter)
+
+
 
 
 
