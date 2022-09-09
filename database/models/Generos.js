@@ -5,9 +5,11 @@ module.exports = function(sequelize, dataTypes){
         id:{
             type: dataTypes.INTEGER,
             primaryKey: true,
+            allowNull: false
         },
         name:{
-            type: dataTypes.STRING
+            type: dataTypes.STRING,
+            allowNull: true
         },
     }
     let config = {

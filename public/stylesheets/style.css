@@ -2,10 +2,15 @@
   padding: 0;
   margin: 0;
 }
+html {
+  height: 100%;
+}
 body {
+  min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 header{
+  text-align: center;
 }
 a {
   color: white;
@@ -14,10 +19,6 @@ a {
 }
 ul{
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  background-color: white;
 }
 .ul-header{
   background-color: black;
@@ -30,6 +31,10 @@ ul{
   display: flex;
   flex-direction: column;
 
+}
+.ul-listado{
+  display: flex;
+  flex-direction: column;
 }
 li{
   padding: 10px;
@@ -50,4 +55,20 @@ li{
 }
 .boton-crear{
   text-align: right;
+}
+.div-listado{
+  padding-left: 10px;
+
+}
+.p-listado{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
 }

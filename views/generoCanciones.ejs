@@ -8,16 +8,24 @@
     <main>
     <title>Generos</title>
     <div>
+      <div style="display: flex; justify-content: center; padding: 10px;">
+      Este es un listado de todos los géneros disponibles
+      </div>
       <ul class="ul-genero">
         <% generos.forEach(genero => { %>
                 <li> 
-                  <h2><%= genero.id %> | <%= genero.name %></h2>
+                  <p>ID: <%= genero.id %> || Nombre del género: <%= genero.name %></p>
                 </li>
               <%   }) %>
       </ul>
     </div>
-    <div>
-      <button type="button" onclick="location.href='/'">Inicio</button>
+      <div class="botones genero">
+        <div>
+          <button class="boton-atras" type="button" onclick="location.href='..'">Atrás</button>
+        </div>
+        <div>
+          <button type="button" onclick="location.href='/'">Inicio</button>
+        </div>
     </div>
   </main>
   <%- include('./partials/footer') %>  

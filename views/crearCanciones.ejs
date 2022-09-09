@@ -8,7 +8,7 @@
       <%- include('./partials/header', {title: 'Crear'}) %>
     <main>
     <div class="div-formulario-crear">
-      <form action="/canciones/crear" method="POST" class="formulario-crear">
+      <form action="/canciones/crear" method="POST" class="formulario-crear" style="padding: 30px">
           <div>
             <label for="">Titulo</label>
             <input type="text" name="titulo">
@@ -36,7 +36,7 @@
                 <input type="date" name="lanzamiento">
             </div>
             <div>
-                <label for="">Albumes</label>
+                <label for="">Album</label>
                 <select name="albumes">
                     <% for (let i = 0; i < albumes.length; i++) { %>
                         <option value="<%=generos[i].id%>">
@@ -46,16 +46,27 @@
                     </select>
                 </div>
                     <div>
-                        <label for="">ID artista</label>
-                        <input type="text" name="idArtista">
+                        <label for="">Artista</label>
+                <select name="artistas">
+                    <% for (let i = 0; i < artistas.length; i++) { %>
+                        <option value="<%=artistas[i].id%>">
+                            <%=artistas[i].apellido%>, <%=artistas[i].nombre%>
+                        </option>
+                        <% } %>
+                    </select>
                     </div>
             <div class="boton-crear">
-                <button type="submit" >Crear</button>
-            </div>
-            <div>
-                <button type="button" onclick="location.href='/'">Inicio</button>
+                <button type="submit" style="background-color: rgba(102, 254, 102, 0.929);">Crear</button>
             </div>
         </form>
+    </div>
+    <div class="botones crear">
+        <div>
+            <button class="boton-atras" type="button" onclick="location.href='..'">Atrás</button>
+          </div>
+    <div>
+        <button type="button" onclick="location.href='/'">Inicio</button>
+    </div>
         </div>
     </main>
     <%- include('./partials/footer') %>    

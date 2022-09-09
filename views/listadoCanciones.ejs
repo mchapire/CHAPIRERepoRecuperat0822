@@ -6,23 +6,30 @@
   <body>
     <%- include('./partials/header', {title: 'Listado'}) %>
     <main>
-      <div>
-        <ul>
+      <div><p class="p-listado">Haga click en una canción para acceder a los detalles y la edición</p></div>
+      <div class="div-listado">
+        <ul class="ul-listado">
           <% for (let i=0; i < canciones.length; i++) { %>
             <a href="/canciones/detalle/<%= canciones[i].id %>">
               <li> 
-                <h2><%= canciones[i].id %> | <%= canciones[i].titulo %> | <%= canciones[i].duracion %> | <%= canciones[i].generos.name %></h2>
+                <p>ID: <%= canciones[i].id %> 
+                  <p>Título: <%= canciones[i].titulo %></p> 
+                  <p>Duración (segundos): <%= canciones[i].duracion %></p> 
+                  <p>Género: <%= canciones[i].generos.name %></p>
+                </p>
               </li>
             </a>
             <%   } %>
           </ul>
         </div>
-        <div>
-          <button type="button" onclick="location.href='/canciones/crear'">Crear canción</button>
+        <div style="padding: 10px">
+          <button class="boton-crear" type="button" onclick="location.href='/canciones/crear'" style="background-color: rgb(175, 175, 255);">Crear canción</button>
         </div>
+        <div class="botones listado" style="justify-content: left;">
     <div>
-      <button type="button" onclick="location.href='/'">Inicio</button>
+      <button class="boton-atras" type="button" onclick="location.href='..'">Atrás</button>
     </div>
+  </div>
   </main>
     <%- include('./partials/footer') %>
   </body>

@@ -1,54 +1,86 @@
-const path = require('path');
 const db = require('../../database/models');
-const sequelize = db.sequelize;
-const { Op } = require("sequelize");
-
-const Canciones = db.Canciones;
-const Albumes = db.Albumes;
-const Artistas = db.Artistas;
-const Generos = db.Generos;
+const Op = db.Sequelize.Op;
 
 const productAPIController = {
-    listar: (req, res) => {
-        let promCanciones = Canciones.findAll(/*{
-            include: [ 'generos', 'albumes', 'artistas'],
-        }*/)
-        .then((canciones) => {
+    listar: function(req, res){
 
-            canciones.forEach((cancion) => {
-                cancion.dataValues.detail = `http://localhost:3000/api/canciones/detalle/${cancion.id}`;
-              });
+        let pedidoCanciones = db.Canciones.findAll({
+            include: [{association: "generos"}, {association: "artistas"}, {association: "albumes"}]
+        });
+        let pedidoGeneros = db.Generos.findAll();
 
-            
-            let response = {
-                count: canciones.length,
-                canciones: canciones,
-            }
-            return (
-                res.json(response))
-            });
+        Promise.all([pedidoCanciones, pedidoGeneros])
+            .then(function([canciones, generos]){
+
+            return res.status(200).json({
+                totalCanciones: canciones.length,
+                totalGeneros: generos.length,
+                data: canciones,
+                status: 200
+            })
+        })
     },
-    
-    detalle: (req, res) => {
-        Canciones.findByPk(req.params.id /*,
-            {
-                include: [ 'generos', 'albumes', 'artistas'],
-            }*/)
-            .then(cancion => {
-                let response = {
-
-                    cancion: {
-                        titulo: cancion.titulo,
-                        duracion: cancion.duracion,
-                        created_at: cancion.creacion,
-                        updated_at: cancion.lanzamiento,
-                        genero_id: cancion.genero,
-                        album_id: cancion.idAlbum,
-                        artista_id: cancion.idArtista
-                    }
-                }
-                res.json(response);
-            });
+    editar: function(req, res){
+       db.Canciones.update(req.body,{
+        where: {
+            id: req.params.id
+        }
+    })
+           .then(function(cancion){
+             return res.status(200).json({
+               data: cancion,
+               status: 200,
+               editada: "La canción fue editada correctamente"
+             })
+       })
+    },
+    detalle: function(req, res){
+        db.Canciones.findByPk(req.params.id)
+            .then(function(cancion){
+              return res.status(200).json({
+                data: cancion,
+                status: 200
+              })
+        })
+    },
+    crear: function(req, res){
+        db.Canciones.create(req.body)
+            .then(function(cancion){
+              return res.status(200).json({
+                data: cancion,
+                status: 200,
+                creada: "Si"
+              })
+        })
+    },
+    borrar: function(req, res){
+        db.Canciones.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(function(respuesta){
+              return res.json(respuesta)
+        })
+    },
+    buscar: function(req, res){
+        db.Canciones.findAll({
+            where: {
+                titulo: { [Op.like]: `%` + req.query.keyword + `%`}
+            }
+        })
+        .then(function(canciones){
+            return res.status(200).json(canciones)
+        })
+    },
+    generos: function(req, res){
+        db.Generos.findAll()
+        .then(function(generos){
+            return res.status(200).json({
+                data: generos,
+                status: 200
+            })
+        })
     },
 }
 
