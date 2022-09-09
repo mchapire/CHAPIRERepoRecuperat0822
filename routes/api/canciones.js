@@ -5,6 +5,6 @@ const cancionesAPIController = require('../../controllers/api/cancionesAPIContro
 
 router.get('/', cancionesAPIController.listar);
 router.get('/detail/:id', cancionesAPIController.detalle);
-// router.get('/generos', cancionesAPIController.generos);
+// router.get('/editar/:id', cancionesAPIController.editar);
 
 module.exports = router;
